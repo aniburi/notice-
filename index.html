@@ -1,160 +1,294 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>সিস্টেম আপডেট নোটিশ</title>
+    <title>System Upgrade Notice</title>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
-        
         :root {
-            --primary-color: #e74c3c;
-            --secondary-color: #3498db;
-            --text-color: #333;
-            --bg-color: #f9f9f9;
+            --primary: #FF6B6B;
+            --secondary: #4ECDC4;
+            --dark: #292F36;
+            --light: #F7FFF7;
         }
         
         body {
-            font-family: 'Hind Siliguri', sans-serif;
-            background-color: var(--bg-color);
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             margin: 0;
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            color: var(--text-color);
+            color: var(--dark);
         }
         
         .notice-container {
             width: 90%;
-            max-width: 600px;
+            max-width: 650px;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
             overflow: hidden;
-            position: relative;
-            border: 3px solid var(--primary-color);
-            animation: borderGlow 8s infinite alternate;
+            border: 4px solid;
+            border-image: linear-gradient(45deg, var(--primary), var(--secondary)) 1;
+            animation: borderPulse 6s infinite alternate;
         }
         
-        @keyframes borderGlow {
-            0% { border-color: #e74c3c; }
-            25% { border-color: #3498db; }
-            50% { border-color: #2ecc71; }
-            75% { border-color: #f39c12; }
-            100% { border-color: #9b59b6; }
+        @keyframes borderPulse {
+            0% { border-image-source: linear-gradient(45deg, #FF6B6B, #4ECDC4); }
+            50% { border-image-source: linear-gradient(45deg, #45B7D1, #A162E8); }
+            100% { border-image-source: linear-gradient(45deg, #FF9A8B, #FF6B6B); }
         }
         
         .notice-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            background: linear-gradient(to right, var(--primary), var(--secondary));
             color: white;
-            padding: 20px;
+            padding: 25px;
             text-align: center;
         }
         
         .notice-body {
             padding: 30px;
-            text-align: center;
         }
         
         h1 {
             margin: 0;
-            font-size: 2.2rem;
+            font-size: 2.4rem;
             font-weight: 700;
         }
         
-        .notice-message {
-            font-size: 1.2rem;
-            line-height: 1.8;
-            margin-bottom: 30px;
+        .language-tabs {
+            display: flex;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #eee;
         }
         
-        .emoji {
-            font-size: 3rem;
-            margin: 20px 0;
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            border-bottom: 3px solid var(--primary);
+            color: var(--primary);
+        }
+        
+        .notice-content {
+            display: none;
+        }
+        
+        .notice-content.active {
             display: block;
         }
         
-        .countdown {
-            font-size: 1.5rem;
-            font-weight: 600;
-            color: var(--primary-color);
+        .emoji {
+            font-size: 3.5rem;
+            text-align: center;
             margin: 20px 0;
         }
         
-        .support-message {
+        .waiting-users {
             background: #f8f9fa;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
-            margin-top: 30px;
+            margin: 25px 0;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        
+        .user-count {
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.3rem;
+        }
+        
+        .progress-container {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin: 25px 0;
+            overflow: hidden;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(to right, var(--primary), var(--secondary));
+            width: 65%;
+            animation: progressAnimation 2s infinite alternate;
+        }
+        
+        @keyframes progressAnimation {
+            0% { width: 65%; }
+            100% { width: 68%; }
+        }
+        
+        .support-message {
             font-style: italic;
-            border-left: 4px solid var(--secondary-color);
+            color: #6c757d;
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.95rem;
         }
         
         .footer {
             text-align: center;
-            padding: 15px;
-            background: #f1f1f1;
+            padding: 20px;
+            background: #f8f9fa;
             font-size: 0.9rem;
-        }
-        
-        @media (max-width: 500px) {
-            h1 { font-size: 1.8rem; }
-            .notice-message { font-size: 1rem; }
+            color: #6c757d;
         }
     </style>
 </head>
 <body>
     <div class="notice-container">
         <div class="notice-header">
-            <h1>সিস্টেম আপডেট নোটিশ</h1>
+            <h1>System Upgrade</h1>
         </div>
         
         <div class="notice-body">
-            <span class="emoji">🚧</span>
-            <div class="notice-message">
-                <p>আমাদের প্রিয় ব্যবহারকারীবৃন্দ,</p>
-                <p>আপনাকে আরও উন্নত সেবা প্রদানের লক্ষ্যে আমরা সিস্টেম আপগ্রেড করছি।</p>
-                <p><strong>উন্নত স্বংস্করণের জন্য বটটি সাময়িকভাবে বন্ধ রাখা হয়েছে।</strong></p>
-                <p>আমরা খুব শীঘ্রই নতুন ফিচার সহ ফিরে আসবো।</p>
+            <div class="language-tabs">
+                <div class="tab active" onclick="showLanguage('en')">English</div>
+                <div class="tab" onclick="showLanguage('bn')">বাংলা</div>
+                <div class="tab" onclick="showLanguage('es')">Español</div>
+                <div class="tab" onclick="showLanguage('ar')">العربية</div>
             </div>
             
-            <div class="countdown" id="countdown">
-                আবারও দেখা হবে খুব দ্রুত...
+            <!-- English Content -->
+            <div id="en-content" class="notice-content active">
+                <div class="emoji">🚀</div>
+                <h2>We're Improving Your Experience</h2>
+                <p>Our system is currently undergoing scheduled maintenance to bring you exciting new features and improved performance.</p>
+                <p><strong>The bot will be temporarily unavailable during this upgrade.</strong></p>
+                
+                <div class="waiting-users">
+                    <span id="user-count" class="user-count">2,847</span> users are waiting with you
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                <p>Expected completion: <strong>The wait is coming to an end very soon</strong></p>
+                
+                <div class="support-message">
+                    Thank you for your patience. We're working hard to serve you better.
+                </div>
             </div>
             
-            <div class="support-message">
-                <p>আপনার ধৈর্য্য ও সহযোগিতার জন্য আমরা অত্যন্ত কৃতজ্ঞ। এই সাময়িক অসুবিধার জন্য আমরা আন্তরিকভাবে দুঃখিত।</p>
-                <p>যেকোনো জরুরি প্রয়োজনে আমাদের সাপোর্ট টিমের সাথে যোগাযোগ করুন।</p>
+            <!-- Bangla Content -->
+            <div id="bn-content" class="notice-content">
+                <div class="emoji">🚀</div>
+                <h2>আমরা আপনার অভিজ্ঞতা উন্নত করছি</h2>
+                <p>আমরা নতুন ফিচার এবং উন্নত পারফরম্যান্স নিয়ে আসতে সিস্টেম আপগ্রেড করছি।</p>
+                <p><strong>আপগ্রেড চলাকালীন বটটি সাময়িকভাবে বন্ধ থাকবে।</strong></p>
+                
+                <div class="waiting-users">
+                    <span id="bn-user-count" class="user-count">২,৮৪৭</span> ব্যবহারকারী আপনার সাথে অপেক্ষা করছেন
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                <p>আনুমানিক সমাপ্তি: <strong>খুব শীঘ্রই অপেক্ষার সমাপ্তি হচ্ছে... </strong></p>
+                
+                <div class="support-message">
+                    আপনার ধৈর্য্যের জন্য ধন্যবাদ। আমরা আপনাকে সেবা দিতে কাজ করছি।
+                </div>
+            </div>
+            
+            <!-- Spanish Content -->
+            <div id="es-content" class="notice-content">
+                <div class="emoji">🚀</div>
+                <h2>Estamos Mejorando Tu Experiencia</h2>
+                <p>Nuestro sistema está en mantenimiento programado para ofrecerte nuevas funciones y mejor rendimiento.</p>
+                <p><strong>El bot estará temporalmente no disponible durante esta actualización.</strong></p>
+                
+                <div class="waiting-users">
+                    <span id="es-user-count" class="user-count">2.847</span> usuarios están esperando contigo
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                
+                
+                <div class="support-message">
+                    Gracias por tu paciencia."La espera está por terminar muy pronto."
+                </div>
+            </div>
+            
+            <!-- Arabic Content -->
+            <div id="ar-content" class="notice-content">
+                <div class="emoji">🚀</div>
+                <h2>نقوم بتحسين تجربتك</h2>
+                <p>نظامنا يخضع حاليًا للصيانة المجدولة لتقديم ميزات جديدة وأداء محسن.</p>
+                <p><strong>سيكون البوت غير متاح مؤقتًا أثناء التحديث.</strong></p>
+                
+                <div class="waiting-users">
+                    <span id="ar-user-count" class="user-count">٢,٨٤٧</span> مستخدم ينتظرون معك
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-bar"></div>
+                </div>
+                
+                <p>التاريخ المتوقع للانتهاء: <strong>"الانتظار شارف على الانتهاء قريبًا جدًا"</strong></p>
+                
+                <div class="support-message">
+                    شكرًا لصبرك. نحن نعمل بجد لخدمتك بشكل أفضل.
+                </div>
             </div>
         </div>
         
         <div class="footer">
-            ধন্যবাদ সাথে থাকার জন্য। আমরা আপনার জন্য আরও ভালো কিছু নিয়ে ফিরে আসছি।
+            © 2025 Our Bot Service. All rights reserved.
         </div>
     </div>
 
     <script>
-        // কাউন্টডাউন এনিমেশন
-        const messages = [
-            "আমরা ফিরে আসছি ২৪ ঘন্টার মধ্যে...",
-            "সিস্টেম আপডেট চলছে...",
-            "আপনার জন্য অপেক্ষা করছি...",
-            "নতুন কিছু আসছে খুব দ্রুত..."
-        ];
-        
-        let currentMessage = 0;
-        const countdownElement = document.getElementById('countdown');
-        
-        setInterval(() => {
-            currentMessage = (currentMessage + 1) % messages.length;
-            countdownElement.textContent = messages[currentMessage];
+        // Language switching
+        function showLanguage(lang) {
+            document.querySelectorAll('.notice-content').forEach(content => {
+                content.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
             
-            // র্যান্ডম কালার চেঞ্জ
-            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
-            countdownElement.style.color = colors[Math.floor(Math.random() * colors.length)];
-        }, 3000);
+            document.getElementById(lang + '-content').classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // Animated user count
+        function animateUserCount() {
+            const baseCount = 2847;
+            const elements = [
+                document.getElementById('user-count'),
+                document.getElementById('bn-user-count'),
+                document.getElementById('es-user-count'),
+                document.getElementById('ar-user-count')
+            ];
+            
+            setInterval(() => {
+                const randomIncrement = Math.floor(Math.random() * 10);
+                const newCount = baseCount + randomIncrement;
+                
+                elements[0].textContent = newCount.toLocaleString('en');
+                elements[1].textContent = newCount.toLocaleString('bn');
+                elements[2].textContent = newCount.toLocaleString('es');
+                elements[3].textContent = newCount.toLocaleString('ar');
+            }, 3000);
+        }
+        
+        // Initialize
+        animateUserCount();
     </script>
 </body>
 </html>
