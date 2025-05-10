@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>সিস্টেম আপডেট নোটিশ</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap');
+        
+        :root {
+            --primary-color: #e74c3c;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --bg-color: #f9f9f9;
+        }
+        
+        body {
+            font-family: 'Hind Siliguri', sans-serif;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: var(--text-color);
+        }
+        
+        .notice-container {
+            width: 90%;
+            max-width: 600px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            position: relative;
+            border: 3px solid var(--primary-color);
+            animation: borderGlow 8s infinite alternate;
+        }
+        
+        @keyframes borderGlow {
+            0% { border-color: #e74c3c; }
+            25% { border-color: #3498db; }
+            50% { border-color: #2ecc71; }
+            75% { border-color: #f39c12; }
+            100% { border-color: #9b59b6; }
+        }
+        
+        .notice-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .notice-body {
+            padding: 30px;
+            text-align: center;
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+        }
+        
+        .notice-message {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .emoji {
+            font-size: 3rem;
+            margin: 20px 0;
+            display: block;
+        }
+        
+        .countdown {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin: 20px 0;
+        }
+        
+        .support-message {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 30px;
+            font-style: italic;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            background: #f1f1f1;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 500px) {
+            h1 { font-size: 1.8rem; }
+            .notice-message { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="notice-container">
+        <div class="notice-header">
+            <h1>সিস্টেম আপডেট নোটিশ</h1>
+        </div>
+        
+        <div class="notice-body">
+            <span class="emoji">🚧</span>
+            <div class="notice-message">
+                <p>আমাদের প্রিয় ব্যবহারকারীবৃন্দ,</p>
+                <p>আপনাকে আরও উন্নত সেবা প্রদানের লক্ষ্যে আমরা সিস্টেম আপগ্রেড করছি।</p>
+                <p><strong>উন্নত স্বংস্করণের জন্য বটটি সাময়িকভাবে বন্ধ রাখা হয়েছে।</strong></p>
+                <p>আমরা খুব শীঘ্রই নতুন ফিচার সহ ফিরে আসবো।</p>
+            </div>
+            
+            <div class="countdown" id="countdown">
+                আবারও দেখা হবে খুব দ্রুত...
+            </div>
+            
+            <div class="support-message">
+                <p>আপনার ধৈর্য্য ও সহযোগিতার জন্য আমরা অত্যন্ত কৃতজ্ঞ। এই সাময়িক অসুবিধার জন্য আমরা আন্তরিকভাবে দুঃখিত।</p>
+                <p>যেকোনো জরুরি প্রয়োজনে আমাদের সাপোর্ট টিমের সাথে যোগাযোগ করুন।</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            ধন্যবাদ সাথে থাকার জন্য। আমরা আপনার জন্য আরও ভালো কিছু নিয়ে ফিরে আসছি।
+        </div>
+    </div>
+
+    <script>
+        // কাউন্টডাউন এনিমেশন
+        const messages = [
+            "আমরা ফিরে আসছি ২৪ ঘন্টার মধ্যে...",
+            "সিস্টেম আপডেট চলছে...",
+            "আপনার জন্য অপেক্ষা করছি...",
+            "নতুন কিছু আসছে খুব দ্রুত..."
+        ];
+        
+        let currentMessage = 0;
+        const countdownElement = document.getElementById('countdown');
+        
+        setInterval(() => {
+            currentMessage = (currentMessage + 1) % messages.length;
+            countdownElement.textContent = messages[currentMessage];
+            
+            // র্যান্ডম কালার চেঞ্জ
+            const colors = ['#e74c3c', '#3498db', '#2ecc71', '#f39c12', '#9b59b6'];
+            countdownElement.style.color = colors[Math.floor(Math.random() * colors.length)];
+        }, 3000);
+    </script>
+</body>
+</html>
